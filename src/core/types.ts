@@ -32,12 +32,7 @@ export const productPrices: Record<ProductEnum, number> = {
 
 export type ProductInventory = Record<ProductEnum, number>;
 
-// ========== State & Actions ==========
-
-export interface MessageState {
-    key: string;
-    values?: Record<string, string | number>;
-}
+// ========== Events ==========
 
 export enum EventEnum {
     DEPOSITED = "DEPOSITED",
@@ -45,7 +40,24 @@ export enum EventEnum {
     CANCELLED = "CANCELLED",
     INSUFFICIENT_FUNDS = "INSUFFICIENT_FUNDS",
     OUT_OF_STOCK = "OUT_OF_STOCK",
-    UNABLE_TO_GIVE_CHANGE = "UNABLE_TO_GIVE_CHANGE"
+    UNABLE_TO_GIVE_CHANGE = "UNABLE_TO_GIVE_CHANGE",
+    INSERT_PAYMENT = "INSERT_PAYMENT"
+}
+
+export const eventTimeoutDurations: Partial<Record<EventEnum, number>> = {
+    [EventEnum.INSERT_PAYMENT]: 2000,
+    [EventEnum.INSUFFICIENT_FUNDS]: 2000,
+    [EventEnum.OUT_OF_STOCK]: 2000,
+    [EventEnum.UNABLE_TO_GIVE_CHANGE]: 2500,
+    [EventEnum.CANCELLED]: 2000,
+    [EventEnum.PRODUCT_DISPENSED]: 2500
+};
+
+// ========== State & Actions ==========
+
+export interface MessageState {
+    key: string;
+    values?: Record<string, string | number>;
 }
 
 export interface State {

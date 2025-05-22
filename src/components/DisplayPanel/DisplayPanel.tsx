@@ -1,29 +1,21 @@
-import type { CurrencyInventory, EventEnum, ProductEnum } from "@core/types";
-import { useDisplayPanelMessage } from "@hooks";
+import { useObservedDisplayMessage } from "@hooks/useObservedDisplayMessage";
+import { observer } from "mobx-react-lite";
+import classNames from "classnames";
+import { useVendingMachineStore } from "@stores/useVendingMachineStore";
 
-interface DisplayPanelProps {
-    changeToReturn?: CurrencyInventory;
-    event: EventEnum | null;
-    insertedAmount?: number;
-    selectedProduct?: ProductEnum | null;
-}
+interface DisplayPanelProps {}
 
-export function DisplayPanel({
-    changeToReturn,
-    event,
-    insertedAmount,
-    selectedProduct
-}: DisplayPanelProps) {
-    const message = useDisplayPanelMessage({
-        event: event,
-        insertedAmount: insertedAmount,
-        changeToReturn: changeToReturn,
-        selectedProduct: selectedProduct
-    });
+export const DisplayPanel: React.FC<DisplayPanelProps> = observer(() => {
+    const { event } = useVendingMachineStore();
+    const message = useObservedDisplayMessage();
 
     return (
-        <div className="display-panel">
+        <div
+            className={classNames("display-panel", {
+                highlighted: event === "INSERT_PAYMENT"
+            })}
+        >
             <p>{message}</p>
         </div>
     );
-}
+});

@@ -3,7 +3,6 @@ import { CurrencyEnum, ProductEnum } from "./types";
 
 export const initialState: State = {
     insertedAmount: 0,
-    message: "Insert currency to begin.",
 
     currencyInventory: {
         [CurrencyEnum.NICKEL]: 5,
@@ -22,5 +21,13 @@ export const initialState: State = {
         [CurrencyEnum.NICKEL]: 0,
         [CurrencyEnum.DIME]: 0,
         [CurrencyEnum.QUARTER]: 0
-    }
+    },
+
+    selectedProduct: null,
+    changeToReturn: {
+        [CurrencyEnum.NICKEL]: 0,
+        [CurrencyEnum.DIME]: 0,
+        [CurrencyEnum.QUARTER]: 0
+    },
+    event: null
 };

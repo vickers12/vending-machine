@@ -16,12 +16,14 @@
         "outOfStock": "Out of stock"
     },
     "displayPanel": {
+        "default": "Please insert payment to begin",
         "totalInserted": "Total inserted: {{value}}",
         "dispensedWithChange": "Dispensed {{product}}. Returning {{value}} in change.",
         "insertedWithTotal": "Inserted {{value}}. Total: {{total}}",
         "dispensedWithoutChange": "Dispensed {{product}}. No change to return.",
         "unableToGiveChange": "Unable to give change. Please use exact amount or cancel.",
         "insufficientFunds": "Insufficient funds.",
+        "insertPayment": "Please insert {{value}} to buy a {{product}}.",
         "outOfStock": "Out of stock.",
         "cancelMsg": "Transaction canceled. Returning money."
     },

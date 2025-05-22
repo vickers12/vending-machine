@@ -19,7 +19,8 @@ export default defineConfig({
             "@core": resolve(__dirname, "./src/core"),
             "@hooks": resolve(__dirname, "./src/hooks"),
             "@utils": resolve(__dirname, "./src/utils"),
-            "@i18n": resolve(__dirname, "./src/i18n")
+            "@i18n": resolve(__dirname, "./src/i18n"),
+            "@stores": resolve(__dirname, "./src/stores")
         }
     }
 });

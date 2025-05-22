@@ -5,7 +5,7 @@ interface CancelButtonProps {
     onCancel: () => void;
 }
 
-export function CancelButton({ onCancel }: CancelButtonProps) {
+export const CancelButton: React.FC<CancelButtonProps> = ({ onCancel }) => {
     const { t } = useTranslation();
 
     return (
@@ -17,4 +17,4 @@ export function CancelButton({ onCancel }: CancelButtonProps) {
             {t("cancelButton.label")}
         </Button>
     );
-}
+};
