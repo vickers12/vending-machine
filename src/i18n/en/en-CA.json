@@ -1,0 +1,39 @@
+{
+    "centSymbol": "{{value}}¢",
+    "quantity": "Qty: {{quantity}}",
+    "cancelButton": {
+        "label": "Cancel",
+        "tooltip": "Press to cancel the transaction and return your money.",
+        "ariaLabel": "Cancel transaction"
+    },
+    "currencyButton": {
+        "tooltip": "Press to insert {{label}}.",
+        "ariaLabel": "Insert {{label}}"
+    },
+    "productButton": {
+        "tooltip": "Press to select {{label}}.",
+        "ariaLabel": "Select {{label}}",
+        "outOfStock": "Out of stock"
+    },
+    "displayPanel": {
+        "totalInserted": "Total inserted: {{value}}",
+        "dispensedWithChange": "Dispensed {{product}}. Returning {{value}} in change.",
+        "insertedWithTotal": "Inserted {{value}}. Total: {{total}}",
+        "dispensedWithoutChange": "Dispensed {{product}}. No change to return.",
+        "unableToGiveChange": "Unable to give change. Please use exact amount or cancel.",
+        "insufficientFunds": "Insufficient funds.",
+        "outOfStock": "Out of stock.",
+        "cancelMsg": "Transaction canceled. Returning money."
+    },
+    "currency": {
+        "nickel": "5¢",
+        "dime": "10¢",
+        "quarter": "25¢"
+    },
+    "product": {
+        "cola": "Cola",
+        "dietCola": "Diet Cola",
+        "limeSoda": "Lime Soda",
+        "water": "Water"
+    }
+}

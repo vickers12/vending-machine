@@ -1,0 +1,16 @@
+.currencyButton {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid #444;
+    background-color: gold;
+    font-weight: bold;
+    font-size: 1rem;
+    margin: 0.5rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+currencyButton:hover {
+    transform: scale(1.05);
+}
