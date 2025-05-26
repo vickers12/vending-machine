@@ -1,9 +1,9 @@
 import { useTranslation } from "react-i18next";
-import { useCurrency } from "@hooks/useCurrency";
+import { useMoneyFormat } from "@hooks";
 import { productLabelKeys } from "@i18n/labelKeys";
-import { calculateChangeTotal } from "@utils/currency";
 import { useVendingMachineStore } from "@stores/useVendingMachineStore";
 import { EventEnum, productPrices } from "@core/types";
+import { calculateMoneyTotalByInventory } from "@utils/money";
 
 /**
  * Returns a localized message based on observable MobX store state.
@@ -11,7 +11,7 @@ import { EventEnum, productPrices } from "@core/types";
  */
 export const useObservedDisplayMessage = (): string | null => {
     const { t } = useTranslation();
-    const { format } = useCurrency();
+    const { format } = useMoneyFormat();
     const store = useVendingMachineStore();
 
     const { event, insertedAmount, changeToReturn, selectedProduct } = store;
@@ -26,7 +26,7 @@ export const useObservedDisplayMessage = (): string | null => {
 
         case EventEnum.PRODUCT_DISPENSED: {
             if (!selectedProduct) return null;
-            const changeTotal = changeToReturn ? calculateChangeTotal(changeToReturn) : 0;
+            const changeTotal = changeToReturn ? calculateMoneyTotalByInventory(changeToReturn) : 0;
 
             return changeTotal > 0
                 ? t("displayPanel.dispensedWithChange", {
@@ -48,11 +48,11 @@ export const useObservedDisplayMessage = (): string | null => {
                 value: format(productPrices[selectedProduct])
             });
 
-        case EventEnum.INSUFFICIENT_FUNDS:
-            return t("displayPanel.insufficientFunds");
-
         case EventEnum.OUT_OF_STOCK:
-            return t("displayPanel.outOfStock");
+            if (!selectedProduct) return null;
+            return t("displayPanel.outOfStock", {
+                product: t(productLabelKeys[selectedProduct])
+            });
 
         case EventEnum.UNABLE_TO_GIVE_CHANGE:
             return t("displayPanel.unableToGiveChange");

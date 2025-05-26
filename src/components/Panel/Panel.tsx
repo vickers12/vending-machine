@@ -1,36 +1,34 @@
-import { CurrencyEnum } from "@core/types";
+import { CoinEnum } from "@core/types";
 import { useVendingMachineStore } from "@stores/useVendingMachineStore";
 import { observer } from "mobx-react-lite";
 import { CancelButton } from "@components/CancelButton";
-import { CurrencyButton } from "@components/CurrencyButton";
+import { CoinButton } from "@components/CoinButton";
 
 import styles from "./Panel.module.css";
+import { DisplayPanel } from "@components/DisplayPanel";
+import { Dispenser } from "@components/Dispenser";
 
 export interface PanelProps {}
 
 export const Panel: React.FC<PanelProps> = observer(() => {
     const store = useVendingMachineStore();
 
-    const handleDeposit = (currency: CurrencyEnum) => {
-        store.deposit(currency);
+    const handleDeposit = (payment: CoinEnum) => {
+        store.deposit(payment);
     };
 
     return (
-        <div className={styles.panel}>
-            <div className="currency-tray">
-                {Object.values(CurrencyEnum).map((currency) => (
-                    <CurrencyButton key={currency} currency={currency} onInsert={handleDeposit} />
-                ))}
+        <aside className={styles.panel}>
+            <DisplayPanel />
+            <div className={styles["panel__content"]}>
+                <div className={styles["panel__coin-tray"]}>
+                    {Object.values(CoinEnum).map((coinKey) => (
+                        <CoinButton key={coinKey} coinKey={coinKey} onInsert={handleDeposit} />
+                    ))}
+                </div>
+                <CancelButton onCancel={() => store.cancel()} />
+                <Dispenser />
             </div>
-            Currency inventory:
-            <div className="currency-inventory">
-                {Object.entries(store.currencyInventory).map(([currency, count]) => (
-                    <div key={currency}>
-                        {currency}: {count}
-                    </div>
-                ))}
-            </div>
-            <CancelButton onCancel={() => store.cancel()} />
-        </div>
+        </aside>
     );
 });

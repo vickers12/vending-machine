@@ -1,13 +1,13 @@
 import type { State } from "./types";
-import { CurrencyEnum, ProductEnum } from "./types";
+import { CoinEnum, ProductEnum } from "./types";
 
 export const initialState: State = {
     insertedAmount: 0,
 
-    currencyInventory: {
-        [CurrencyEnum.NICKEL]: 5,
-        [CurrencyEnum.DIME]: 5,
-        [CurrencyEnum.QUARTER]: 5
+    moneyInventory: {
+        [CoinEnum.NICKEL]: 5,
+        [CoinEnum.DIME]: 5,
+        [CoinEnum.QUARTER]: 5
     },
 
     productInventory: {
@@ -17,17 +17,17 @@ export const initialState: State = {
         [ProductEnum.WATER]: 2
     },
 
-    insertedCurrencies: {
-        [CurrencyEnum.NICKEL]: 0,
-        [CurrencyEnum.DIME]: 0,
-        [CurrencyEnum.QUARTER]: 0
+    insertedPaymentInventory: {
+        [CoinEnum.NICKEL]: 0,
+        [CoinEnum.DIME]: 0,
+        [CoinEnum.QUARTER]: 0
     },
 
     selectedProduct: null,
     changeToReturn: {
-        [CurrencyEnum.NICKEL]: 0,
-        [CurrencyEnum.DIME]: 0,
-        [CurrencyEnum.QUARTER]: 0
+        [CoinEnum.NICKEL]: 0,
+        [CoinEnum.DIME]: 0,
+        [CoinEnum.QUARTER]: 0
     },
     event: null
 };

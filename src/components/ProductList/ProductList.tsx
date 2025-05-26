@@ -2,6 +2,7 @@ import { productPrices, type ProductEnum } from "@core/types";
 import { ProductButton } from "@components/ProductButton";
 import { useVendingMachineStore } from "@stores/useVendingMachineStore";
 import { observer } from "mobx-react-lite";
+import styles from "./ProductList.module.css";
 
 export interface ProductListProps {}
 
@@ -13,7 +14,7 @@ export const ProductList: React.FC<ProductListProps> = observer(() => {
     };
 
     return (
-        <div className="product-grid">
+        <div className={styles["product-list"]}>
             {Object.entries(productPrices).map(([productKey, price]) => (
                 <ProductButton
                     key={productKey}

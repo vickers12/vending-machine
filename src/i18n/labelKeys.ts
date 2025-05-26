@@ -1,9 +1,9 @@
-import { CurrencyEnum, ProductEnum } from "@core/types";
+import { CoinEnum, ProductEnum } from "@core/types";
 
-export const currencyLabelKeys = {
-    [CurrencyEnum.NICKEL]: "currency.nickel",
-    [CurrencyEnum.DIME]: "currency.dime",
-    [CurrencyEnum.QUARTER]: "currency.quarter"
+export const coinLabelKeys = {
+    [CoinEnum.NICKEL]: "coin.nickel",
+    [CoinEnum.DIME]: "coin.dime",
+    [CoinEnum.QUARTER]: "coin.quarter"
 } as const;
 
 export const productLabelKeys = {

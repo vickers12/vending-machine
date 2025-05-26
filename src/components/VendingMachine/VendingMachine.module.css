@@ -1,0 +1,12 @@
+.vending-machine {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    height: 100vh;
+}
+
+@media (min-width: 768px) {
+    .vending-machine {
+        flex-direction: row;
+    }
+}

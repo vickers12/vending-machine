@@ -1,0 +1,85 @@
+.cancel-button {
+    /* Static Variables */
+    --background-color-default: #fff;
+    --background-color-hovered: #fef9f9;
+    --background-color-pressed: #fdeeed;
+    --background-color-focus-visible: #fef9f9;
+    --background-color-disabled: #f5f5f5;
+    --border-color-default: #ff6f61;
+    --border-color-hovered: #db4b3e;
+    --border-color-pressed: #cf1200;
+    --border-color-focus-visible: #db4b3e;
+    --border-color-disabled: #f5f5f5;
+    --color-default: #db4b3e;
+    --color-hovered: #cf1200;
+    --color-pressed: #801107;
+    --color-focus-visible: #cf1200;
+    --color-disabled: #c4c4c4;
+    --outline-default: none;
+    --outline-focus-visible: 2px solid #6bddd3;
+
+    /* Updatable Variables */
+    --background-color: var(--background-color-default);
+    --border-color: var(--border-color-default);
+    --border: 2px solid var(--border-color);
+    --color: var(--color-default);
+    --cursor: pointer;
+    --outline: var(--outline-default);
+    --outline-offset: 2px;
+
+    cursor: var(--cursor);
+
+    display: inline-block;
+
+    width: 100%;
+    padding: 0.5rem 1.5rem;
+    border: none;
+    border: var(--border);
+    border-radius: 0.5rem;
+
+    font-family: var(--font-family-sans);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color);
+    text-align: center;
+    text-decoration: none;
+
+    background-color: var(--background-color);
+    outline: var(--outline);
+    outline-offset: var(--outline-offset);
+
+    transition:
+        background 0.2s ease,
+        border 0.2s ease,
+        color 0.2s ease,
+        outline 0.2s ease;
+}
+
+.cancel-button[data-hovered] {
+    --background-color: var(--background-color-hovered);
+    --border-color: var(--border-color-hovered);
+    --color: var(--color-hovered);
+    --outline: var(--outline-default);
+}
+
+.cancel-button[data-pressed] {
+    --background-color: var(--background-color-pressed);
+    --border-color: var(--border-color-pressed);
+    --color: var(--color-pressed);
+    --outline: var(--outline-default);
+}
+
+.cancel-button[data-focus-visible] {
+    --background-color: var(--background-color-focus-visible);
+    --border-color: var(--border-color-focus-visible);
+    --color: var(--color-focus-visible);
+    --outline: var(--outline-focus-visible);
+}
+
+.cancel-button[data-disabled] {
+    --background-color: var(--background-color-disabled);
+    --border-color: var(--border-color-disabled);
+    --color: var(--color-disabled);
+    --cursor: not-allowed;
+    --outline: var(--outline-default);
+}

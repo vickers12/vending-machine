@@ -1,28 +1,25 @@
 import { makeAutoObservable } from "mobx";
-import {
-    emptyCurrencyInventory,
-    getChange,
-    makeSingleCurrencyInventory,
-    updateCurrencyInventory
-} from "@utils/currency";
-import type { State, CurrencyEnum, ProductEnum } from "@core/types";
-import { currencyValues, EventEnum, eventTimeoutDurations, productPrices } from "@core/types";
+import { resetPaymentInventory, makeSinglePayment, updateMoneyInventory } from "@utils/money";
+import type { State, CoinEnum, ProductEnum } from "@core/types";
+import { coinValues, EventEnum, eventTimeoutDurations, productPrices } from "@core/types";
+import { getChange } from "@utils/money";
 
 export class VendingMachineStore {
-    insertedAmount = 0;
-    insertedCurrencies: State["insertedCurrencies"];
-    currencyInventory: State["currencyInventory"];
+    insertedAmount: State["insertedAmount"];
+    insertedPaymentInventory: State["insertedPaymentInventory"];
+    moneyInventory: State["moneyInventory"];
     productInventory: State["productInventory"];
     selectedProduct: State["selectedProduct"] = null;
-    changeToReturn: State["changeToReturn"] = emptyCurrencyInventory();
+    changeToReturn: State["changeToReturn"] = resetPaymentInventory();
     event: State["event"] = null;
 
     private _eventTimer: ReturnType<typeof setTimeout> | null = null;
+    private _lastStableEvent: EventEnum | null = null;
 
     constructor(initialState: State) {
         this.insertedAmount = initialState.insertedAmount;
-        this.insertedCurrencies = initialState.insertedCurrencies;
-        this.currencyInventory = initialState.currencyInventory;
+        this.insertedPaymentInventory = initialState.insertedPaymentInventory;
+        this.moneyInventory = initialState.moneyInventory;
         this.productInventory = initialState.productInventory;
         this.selectedProduct = initialState.selectedProduct;
         this.changeToReturn = initialState.changeToReturn;
@@ -31,26 +28,25 @@ export class VendingMachineStore {
         makeAutoObservable(this);
     }
 
-    deposit(currency: CurrencyEnum) {
-        const value = currencyValues[currency];
-        const singleDeposit = makeSingleCurrencyInventory(currency);
+    deposit = (coinKey: CoinEnum) => {
+        const value = coinValues[coinKey];
+        const singleDeposit = makeSinglePayment(coinKey);
         this.insertedAmount += value;
-        this.currencyInventory = updateCurrencyInventory(
-            this.currencyInventory,
-            singleDeposit,
-            "add"
-        );
-        this.insertedCurrencies = updateCurrencyInventory(
-            this.insertedCurrencies,
+        this.moneyInventory = updateMoneyInventory(this.moneyInventory, singleDeposit, "add");
+        this.insertedPaymentInventory = updateMoneyInventory(
+            this.insertedPaymentInventory,
             singleDeposit,
             "add"
         );
         this.setEvent(EventEnum.DEPOSITED);
-    }
+    };
 
-    selectProduct(productKey: ProductEnum) {
+    selectProduct = (productKey: ProductEnum) => {
         const price = productPrices[productKey];
         const stock = this.productInventory[productKey];
+
+        /* Needs to be before events for the messages to be right */
+        this.selectedProduct = productKey;
 
         if (stock <= 0) {
             this.setEvent(EventEnum.OUT_OF_STOCK);
@@ -58,16 +54,12 @@ export class VendingMachineStore {
         }
 
         if (this.insertedAmount < price) {
-            if (this.insertedAmount > 0) {
-                this.insertPaymentReminder(productKey);
-                return;
-            }
-            this.setEvent(EventEnum.INSUFFICIENT_FUNDS);
+            this.setEvent(EventEnum.INSERT_PAYMENT);
             return;
         }
 
         const changeNeeded = this.insertedAmount - price;
-        const change = getChange(changeNeeded, this.currencyInventory);
+        const change = getChange(changeNeeded, this.moneyInventory);
 
         if (!change) {
             this.setEvent(EventEnum.UNABLE_TO_GIVE_CHANGE);
@@ -75,39 +67,48 @@ export class VendingMachineStore {
         }
 
         this.insertedAmount = 0;
-        this.insertedCurrencies = emptyCurrencyInventory();
-        this.currencyInventory = updateCurrencyInventory(
-            this.currencyInventory,
-            change,
-            "subtract"
-        );
+        this.insertedPaymentInventory = resetPaymentInventory();
+        this.moneyInventory = updateMoneyInventory(this.moneyInventory, change, "subtract");
         this.productInventory = {
             ...this.productInventory,
             [productKey]: stock - 1
         };
-        this.selectedProduct = productKey;
         this.changeToReturn = change;
+        // Reset last stable event once product is dispensed
+        this._lastStableEvent = null;
         this.setEvent(EventEnum.PRODUCT_DISPENSED);
-    }
+    };
 
-    cancel() {
+    increaseProductInventory = (productKey: ProductEnum, amount: number = 1) => {
+        this.productInventory = {
+            ...this.productInventory,
+            [productKey]: this.productInventory[productKey] + amount
+        };
+    };
+
+    decreaseProductInventory = (productKey: ProductEnum, amount: number = 1) => {
+        const current = this.productInventory[productKey];
+        this.productInventory = {
+            ...this.productInventory,
+            [productKey]: Math.max(0, current - amount)
+        };
+    };
+
+    cancel = () => {
         this.insertedAmount = 0;
-        this.currencyInventory = updateCurrencyInventory(
-            this.currencyInventory,
-            this.insertedCurrencies,
+        this.moneyInventory = updateMoneyInventory(
+            this.moneyInventory,
+            this.insertedPaymentInventory,
             "subtract"
         );
-        this.changeToReturn = { ...this.insertedCurrencies };
-        this.insertedCurrencies = emptyCurrencyInventory();
+        this.changeToReturn = { ...this.insertedPaymentInventory };
+        this.insertedPaymentInventory = resetPaymentInventory();
+        // Reset last stable event once operation is cancelled
+        this._lastStableEvent = null;
         this.setEvent(EventEnum.CANCELLED);
-    }
+    };
 
-    insertPaymentReminder(productKey: ProductEnum) {
-        this.selectedProduct = productKey;
-        this.setEvent(EventEnum.INSERT_PAYMENT);
-    }
-
-    setEvent(event: EventEnum) {
+    setEvent = (event: EventEnum) => {
         this.event = event;
 
         if (this._eventTimer) {
@@ -122,15 +123,17 @@ export class VendingMachineStore {
                     this.clearEvent();
                 }
             }, timeout);
+        } else {
+            this._lastStableEvent = event;
         }
-    }
+    };
 
-    clearEvent() {
-        this.event = null;
+    clearEvent = () => {
+        this.event = this._lastStableEvent ?? null;
 
         if (this._eventTimer) {
             clearTimeout(this._eventTimer);
             this._eventTimer = null;
         }
-    }
+    };
 }

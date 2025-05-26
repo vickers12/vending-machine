@@ -2,9 +2,6 @@ import { useLocale } from "react-aria-components";
 import { useNumberFormatter } from "react-aria";
 import { useTranslation } from "react-i18next";
 
-/**
- * Map region codes to ISO currency codes.
- */
 const regionToCurrency: Record<string, string> = {
     CA: "CAD"
 };
@@ -18,9 +15,9 @@ const getCurrencyFromLocale = (locale: string): string => {
 };
 
 /**
- * Hook to format cents as localized currency or raw cent symbol.
+ * Hook to format money as localized currency or raw cent symbol.
  */
-export const useCurrency = () => {
+export const useMoneyFormat = () => {
     const { locale: ariaLocale } = useLocale();
     const { i18n, t } = useTranslation();
 

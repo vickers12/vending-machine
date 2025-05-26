@@ -1,19 +1,15 @@
-import {
-    emptyCurrencyInventory,
-    getChange,
-    makeSingleCurrencyInventory,
-    updateCurrencyInventory
-} from "@utils/currency";
+import { resetPaymentInventory, makeSinglePayment, updateMoneyInventory } from "@utils/money";
 import type { State, Action } from "./types";
-import { currencyValues, EventEnum, productPrices } from "./types";
+import { coinValues, EventEnum, productPrices } from "./types";
+import { getChange } from "@utils/money";
 
 export function vendingMachineReducer(state: State, action: Action): State {
     switch (action.type) {
         case "DEPOSIT": {
-            const value = currencyValues[action.currency];
-            const singleDeposit = makeSingleCurrencyInventory(action.currency);
-            const updatedInventory = updateCurrencyInventory(
-                state.currencyInventory,
+            const value = coinValues[action.coin];
+            const singleDeposit = makeSinglePayment(action.coin);
+            const updatedInventory = updateMoneyInventory(
+                state.moneyInventory,
                 singleDeposit,
                 "add"
             );
@@ -21,9 +17,9 @@ export function vendingMachineReducer(state: State, action: Action): State {
             return {
                 ...state,
                 insertedAmount: state.insertedAmount + value,
-                currencyInventory: updatedInventory,
-                insertedCurrencies: updateCurrencyInventory(
-                    state.insertedCurrencies,
+                moneyInventory: updatedInventory,
+                insertedPaymentInventory: updateMoneyInventory(
+                    state.insertedPaymentInventory,
                     singleDeposit,
                     "add"
                 ),
@@ -41,11 +37,11 @@ export function vendingMachineReducer(state: State, action: Action): State {
             }
 
             if (state.insertedAmount < price) {
-                return { ...state, event: EventEnum.INSUFFICIENT_FUNDS };
+                return { ...state, event: EventEnum.INSERT_PAYMENT };
             }
 
             const changeNeeded = state.insertedAmount - price;
-            const change = getChange(changeNeeded, state.currencyInventory);
+            const change = getChange(changeNeeded, state.moneyInventory);
 
             if (!change) {
                 return { ...state, event: EventEnum.UNABLE_TO_GIVE_CHANGE };
@@ -54,12 +50,8 @@ export function vendingMachineReducer(state: State, action: Action): State {
             return {
                 ...state,
                 insertedAmount: 0,
-                insertedCurrencies: emptyCurrencyInventory(),
-                currencyInventory: updateCurrencyInventory(
-                    state.currencyInventory,
-                    change,
-                    "subtract"
-                ),
+                insertedPaymentInventory: resetPaymentInventory(),
+                moneyInventory: updateMoneyInventory(state.moneyInventory, change, "subtract"),
                 productInventory: {
                     ...state.productInventory,
                     [productKey]: stock - 1
@@ -74,13 +66,13 @@ export function vendingMachineReducer(state: State, action: Action): State {
             return {
                 ...state,
                 insertedAmount: 0,
-                currencyInventory: updateCurrencyInventory(
-                    state.currencyInventory,
-                    state.insertedCurrencies,
+                moneyInventory: updateMoneyInventory(
+                    state.moneyInventory,
+                    state.insertedPaymentInventory,
                     "subtract"
                 ),
-                insertedCurrencies: emptyCurrencyInventory(),
-                changeToReturn: { ...state.insertedCurrencies },
+                insertedPaymentInventory: resetPaymentInventory(),
+                changeToReturn: { ...state.insertedPaymentInventory },
                 event: EventEnum.CANCELLED
             };
         }

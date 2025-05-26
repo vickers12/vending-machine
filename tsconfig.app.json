@@ -8,6 +8,8 @@
         "skipLibCheck": true,
         "baseUrl": "./src",
         "paths": {
+            "@assets": ["assets"],
+            "@assets/*": ["assets/*"],
             "@components/*": ["components/*"],
             "@core/*": ["core/*"],
             "@hooks": ["hooks"],

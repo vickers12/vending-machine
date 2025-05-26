@@ -6,7 +6,7 @@
         "tooltip": "Press to cancel the transaction and return your money.",
         "ariaLabel": "Cancel transaction"
     },
-    "currencyButton": {
+    "coinButton": {
         "tooltip": "Press to insert {{label}}.",
         "ariaLabel": "Insert {{label}}"
     },
@@ -16,18 +16,16 @@
         "outOfStock": "Out of stock"
     },
     "displayPanel": {
-        "default": "Please insert payment to begin",
+        "default": "Please insert payment",
         "totalInserted": "Total inserted: {{value}}",
-        "dispensedWithChange": "Dispensed {{product}}. Returning {{value}} in change.",
-        "insertedWithTotal": "Inserted {{value}}. Total: {{total}}",
-        "dispensedWithoutChange": "Dispensed {{product}}. No change to return.",
-        "unableToGiveChange": "Unable to give change. Please use exact amount or cancel.",
-        "insufficientFunds": "Insufficient funds.",
-        "insertPayment": "Please insert {{value}} to buy a {{product}}.",
-        "outOfStock": "Out of stock.",
-        "cancelMsg": "Transaction canceled. Returning money."
+        "dispensedWithChange": "Dispensed {{product}}. Returning {{value}} in change",
+        "dispensedWithoutChange": "Dispensed {{product}}. No change to return",
+        "unableToGiveChange": "Unable to give change. Please use exact amount or cancel",
+        "insertPayment": "Please insert {{value}} to buy a {{product}}",
+        "outOfStock": "{{product}} is out of stock",
+        "cancelMsg": "Transaction canceled. Returning money"
     },
-    "currency": {
+    "coin": {
         "nickel": "5¢",
         "dime": "10¢",
         "quarter": "25¢"
@@ -37,5 +35,11 @@
         "dietCola": "Diet Cola",
         "limeSoda": "Lime Soda",
         "water": "Water"
+    },
+    "inventory": {
+        "tab": "Inventory",
+        "coins": "Coins",
+        "products": "Products",
+        "total": "Total"
     }
 }

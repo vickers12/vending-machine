@@ -1,18 +1,18 @@
-// ========== Currency ==========
+// ========== Coins ==========
 
-export enum CurrencyEnum {
+export enum CoinEnum {
     NICKEL = "NICKEL",
     DIME = "DIME",
     QUARTER = "QUARTER"
 }
 
-export const currencyValues: Record<CurrencyEnum, number> = {
-    [CurrencyEnum.NICKEL]: 5,
-    [CurrencyEnum.DIME]: 10,
-    [CurrencyEnum.QUARTER]: 25
+export const coinValues: Record<CoinEnum, number> = {
+    [CoinEnum.NICKEL]: 5,
+    [CoinEnum.DIME]: 10,
+    [CoinEnum.QUARTER]: 25
 };
 
-export type CurrencyInventory = Record<CurrencyEnum, number>;
+export type MoneyInventory = Record<CoinEnum, number>;
 
 // ========== Products ==========
 
@@ -38,19 +38,17 @@ export enum EventEnum {
     DEPOSITED = "DEPOSITED",
     PRODUCT_DISPENSED = "PRODUCT_DISPENSED",
     CANCELLED = "CANCELLED",
-    INSUFFICIENT_FUNDS = "INSUFFICIENT_FUNDS",
     OUT_OF_STOCK = "OUT_OF_STOCK",
     UNABLE_TO_GIVE_CHANGE = "UNABLE_TO_GIVE_CHANGE",
     INSERT_PAYMENT = "INSERT_PAYMENT"
 }
 
 export const eventTimeoutDurations: Partial<Record<EventEnum, number>> = {
-    [EventEnum.INSERT_PAYMENT]: 2000,
-    [EventEnum.INSUFFICIENT_FUNDS]: 2000,
-    [EventEnum.OUT_OF_STOCK]: 2000,
-    [EventEnum.UNABLE_TO_GIVE_CHANGE]: 2500,
-    [EventEnum.CANCELLED]: 2000,
-    [EventEnum.PRODUCT_DISPENSED]: 2500
+    [EventEnum.INSERT_PAYMENT]: 2500,
+    [EventEnum.OUT_OF_STOCK]: 2500,
+    [EventEnum.UNABLE_TO_GIVE_CHANGE]: 3000,
+    [EventEnum.CANCELLED]: 2500,
+    [EventEnum.PRODUCT_DISPENSED]: 3000
 };
 
 // ========== State & Actions ==========
@@ -62,16 +60,16 @@ export interface MessageState {
 
 export interface State {
     insertedAmount: number;
-    insertedCurrencies: CurrencyInventory;
-    currencyInventory: CurrencyInventory;
+    insertedPaymentInventory: MoneyInventory;
+    moneyInventory: MoneyInventory;
     productInventory: Record<ProductEnum, number>;
     selectedProduct: ProductEnum | null;
-    changeToReturn: CurrencyInventory;
+    changeToReturn: MoneyInventory;
     event: EventEnum | null;
 }
 
 export type Action =
-    | { type: "DEPOSIT"; currency: CurrencyEnum }
+    | { type: "DEPOSIT"; coin: CoinEnum }
     | { type: "SELECT_PRODUCT"; productKey: ProductEnum }
     | { type: "CANCEL" }
     | { type: "CLEAR_EVENT" };

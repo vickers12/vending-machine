@@ -1,6 +1,10 @@
 :root {
-    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+    --font-family-sans: "PT Sans Caption", sans-serif;
+    --font-family-serif: "Newsreader", serif;
+
+    font-family: var(--font-family-serif);
     font-size: 16px;
+    font-optical-sizing: auto;
     font-weight: 400;
     text-rendering: optimizeLegibility;
 }
@@ -12,6 +16,13 @@ body {
     padding: 0;
 }
 
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
 main {
-    padding: 3rem 2rem;
+    min-height: 100vh;
+    background-color: #f9f9f9;
 }
