@@ -6,12 +6,6 @@ export enum CoinEnum {
     QUARTER = "QUARTER"
 }
 
-export const coinValues: Record<CoinEnum, number> = {
-    [CoinEnum.NICKEL]: 5,
-    [CoinEnum.DIME]: 10,
-    [CoinEnum.QUARTER]: 25
-};
-
 export type MoneyInventory = Record<CoinEnum, number>;
 
 // ========== Products ==========
@@ -22,13 +16,6 @@ export enum ProductEnum {
     LIMESODA = "LIMESODA",
     WATER = "WATER"
 }
-
-export const productPrices: Record<ProductEnum, number> = {
-    [ProductEnum.COLA]: 25,
-    [ProductEnum.DIETCOLA]: 35,
-    [ProductEnum.LIMESODA]: 25,
-    [ProductEnum.WATER]: 45
-};
 
 export type ProductInventory = Record<ProductEnum, number>;
 
@@ -42,14 +29,6 @@ export enum EventEnum {
     UNABLE_TO_GIVE_CHANGE = "UNABLE_TO_GIVE_CHANGE",
     INSERT_PAYMENT = "INSERT_PAYMENT"
 }
-
-export const eventTimeoutDurations: Partial<Record<EventEnum, number>> = {
-    [EventEnum.INSERT_PAYMENT]: 2500,
-    [EventEnum.OUT_OF_STOCK]: 2500,
-    [EventEnum.UNABLE_TO_GIVE_CHANGE]: 3000,
-    [EventEnum.CANCELLED]: 2500,
-    [EventEnum.PRODUCT_DISPENSED]: 3000
-};
 
 // ========== State & Actions ==========
 

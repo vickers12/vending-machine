@@ -1,8 +1,9 @@
 import { makeAutoObservable } from "mobx";
 import { resetPaymentInventory, makeSinglePayment, updateMoneyInventory } from "@utils/money";
-import type { State, CoinEnum, ProductEnum } from "@core/types";
-import { coinValues, EventEnum, eventTimeoutDurations, productPrices } from "@core/types";
+import { type State, CoinEnum, ProductEnum } from "@core/types";
+import { EventEnum } from "@core/types";
 import { getChange } from "@utils/money";
+import { coinValues, productPrices, eventTimeoutDurations, productLimits } from "@core/constants";
 
 export class VendingMachineStore {
     insertedAmount: State["insertedAmount"];
@@ -80,9 +81,12 @@ export class VendingMachineStore {
     };
 
     increaseProductInventory = (productKey: ProductEnum, amount: number = 1) => {
+        const current = this.productInventory[productKey];
+        const max = productLimits[productKey];
+
         this.productInventory = {
             ...this.productInventory,
-            [productKey]: this.productInventory[productKey] + amount
+            [productKey]: Math.min(current + amount, max)
         };
     };
 
@@ -106,6 +110,21 @@ export class VendingMachineStore {
         this.moneyInventory = {
             ...this.moneyInventory,
             [coinKey]: Math.max(0, current - amount)
+        };
+    };
+
+    restockAll = () => {
+        this.productInventory = {
+            [ProductEnum.COLA]: 10,
+            [ProductEnum.DIETCOLA]: 10,
+            [ProductEnum.LIMESODA]: 10,
+            [ProductEnum.WATER]: 10
+        };
+
+        this.moneyInventory = {
+            [CoinEnum.NICKEL]: 20,
+            [CoinEnum.DIME]: 20,
+            [CoinEnum.QUARTER]: 20
         };
     };
 

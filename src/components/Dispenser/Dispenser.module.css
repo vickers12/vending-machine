@@ -14,9 +14,9 @@
 
     /* Updatable Variables */
     --display: none;
-    --height: 100vh;
+    --height: 100%;
     --inset: 0;
-    --position: fixed;
+    --position: absolute;
     --z-index: 100;
 
     --overlay-display: none;
@@ -33,6 +33,7 @@
     justify-content: center;
 
     height: var(--height);
+    min-height: 0;
     margin-top: auto;
 }
 
@@ -134,7 +135,7 @@
     flex: 0 1 auto;
 
     height: 15.6rem;
-    max-height: 100%;
+    max-height: 85%;
 
     animation: dropIn 0.3s ease-in forwards;
 }

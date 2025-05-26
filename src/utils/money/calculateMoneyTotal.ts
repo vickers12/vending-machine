@@ -1,5 +1,5 @@
+import { coinValues } from "@core/constants";
 import type { CoinEnum, MoneyInventory } from "@core/types";
-import { coinValues } from "@core/types";
 
 export const calculateMoneyTotalByInventory = (inventory: MoneyInventory): number => {
     return Object.entries(inventory).reduce((total, [coinKey, count]) => {

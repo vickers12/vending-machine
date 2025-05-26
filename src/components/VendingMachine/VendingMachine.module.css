@@ -1,12 +1,33 @@
 .vending-machine {
+    --background-image: none;
+    --flex: 1 1 auto;
+    --flex-direction: column;
+
     display: flex;
-    flex-direction: column;
+    flex-direction: var(--flex-direction);
     gap: 0;
     height: 100vh;
 }
 
+.vending-machine__content {
+    position: relative;
+
+    display: flex;
+    flex: var(--flex);
+    flex-direction: column;
+
+    min-height: 0;
+
+    background-image: var(--background-image);
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: 100% 18rem;
+}
+
 @media (min-width: 768px) {
     .vending-machine {
-        flex-direction: row;
+        --background-image: url("/src/assets/background-wave.svg");
+        --flex: 1 1 40rem;
+        --flex-direction: row;
     }
 }

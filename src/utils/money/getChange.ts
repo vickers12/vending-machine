@@ -1,5 +1,6 @@
-import { CoinEnum, coinValues, type MoneyInventory } from "@core/types";
+import { CoinEnum, type MoneyInventory } from "@core/types";
 import { getSortedCoinsDescending } from "./getSortedCoins";
+import { coinValues } from "@core/constants";
 
 /**
  * Attempts to return exact change using available coins.

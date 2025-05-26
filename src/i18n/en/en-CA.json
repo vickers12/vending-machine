@@ -16,14 +16,14 @@
         "outOfStock": "Out of stock"
     },
     "displayPanel": {
-        "default": "Please insert payment",
+        "default": "Please insert payment.",
         "totalInserted": "Total inserted: {{value}}",
-        "dispensedWithChange": "Dispensed {{product}}. Returning {{value}} in change",
-        "dispensedWithoutChange": "Dispensed {{product}}. No change to return",
-        "unableToGiveChange": "Unable to give change. Please use exact amount or cancel",
-        "insertPayment": "Please insert {{value}} to buy a {{product}}",
-        "outOfStock": "{{product}} is out of stock",
-        "cancelMsg": "Transaction canceled. Returning money"
+        "dispensedWithChange": "Dispensed {{product}}. Returning {{value}} in change.",
+        "dispensedWithoutChange": "Dispensed {{product}}. No change to return.",
+        "unableToGiveChange": "Unable to give change. Please use exact amount or cancel.",
+        "insertPayment": "Please insert {{value}} to buy a {{product}}.",
+        "outOfStock": "{{product}} is out of stock.",
+        "cancelMsg": "Transaction canceled. Returning money."
     },
     "coin": {
         "nickel": "5¢",
@@ -40,6 +40,16 @@
         "tab": "Inventory",
         "coins": "Coins",
         "products": "Products",
-        "total": "Total"
+        "total": "Total",
+        "restockAll": "Restock All",
+        "restockAllTooltip": "Press to restock all coins and products.",
+        "increaseProduct": "Increase {{product}}",
+        "increaseProductTooltip": "Press to increase the stock of {{product}} by 1.",
+        "decreaseProduct": "Decrease {{product}}",
+        "decreaseProductTooltip": "Press to decrease the stock of {{product}} by 1.",
+        "increaseCoin": "Increase {{coin}}",
+        "increaseCoinTooltip": "Press to increase the stock of {{coin}} by 1.",
+        "decreaseCoin": "Decrease {{coin}}",
+        "decreaseCoinTooltip": "Press to decrease the stock of {{coin}} by 1."
     }
 }

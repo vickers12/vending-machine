@@ -2,8 +2,9 @@ import { useTranslation } from "react-i18next";
 import { useMoneyFormat } from "@hooks";
 import { productLabelKeys } from "@i18n/labelKeys";
 import { useVendingMachineStore } from "@stores/useVendingMachineStore";
-import { EventEnum, productPrices } from "@core/types";
+import { EventEnum } from "@core/types";
 import { calculateMoneyTotalByInventory } from "@utils/money";
+import { productPrices } from "@core/constants";
 
 /**
  * Returns a localized message based on observable MobX store state.

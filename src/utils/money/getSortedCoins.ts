@@ -1,4 +1,5 @@
-import { CoinEnum, coinValues } from "@core/types";
+import { coinValues } from "@core/constants";
+import { CoinEnum } from "@core/types";
 
 /**
  * Returns all coins sorted from highest to lowest value.

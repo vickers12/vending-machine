@@ -1,20 +1,16 @@
 .coin-button {
     /* Static Variables */
-    --box-shadow-default: 0px 28px 14px -18px rgba(61, 61, 61, 0.4);
-    --box-shadow-hovered:
-        0px 28px 14px -18px rgba(61, 61, 61, 0.4), 0px 4px 8px 3px rgba(61, 61, 61, 0.25);
-    --box-shadow-pressed:
-        0px 28px 14px -18px rgba(61, 61, 61, 0.4), 0px 4px 9px 4px rgba(61, 61, 61, 0.25);
-    --box-shadow-focus-visible: var(--box-shadow-hovered);
-    --box-shadow-disabled: none;
 
     /* Updatable Variables */
     --border: 2px solid transparent;
     --box-shadow: var(--box-shadow-default);
     --size: 3.75rem;
     --transform: none;
+    --shadow-width: 64%;
 
     cursor: pointer;
+
+    position: relative;
 
     width: var(--size);
     height: var(--size);
@@ -28,6 +24,7 @@
 
 .coin-button[data-hovered] {
     --transform: scale(1.06) translateY(-10%);
+    --shadow-width: 60%;
 }
 
 .coin-button[data-pressed] {
@@ -37,15 +34,30 @@
 .coin-button[data-focus-visible] {
     --border: 2px solid #1f867c;
     --transform: scale(1.06) translateY(-10%);
+    --shadow-width: 60%;
+}
+
+.coin-button::after {
+    content: "";
+
+    position: absolute;
+    bottom: -0.4rem;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: var(--shadow-width);
+    height: 0.625rem;
+    border-radius: 50%;
+
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.45), transparent 70%);
+    filter: blur(2px);
+
+    transition: width 0.2s ease;
 }
 
 .coin-button__image {
     transform: var(--transform);
-
     width: 100%;
     height: 100%;
-
-    box-shadow: var(--box-shadow);
-
     transition: transform 0.2s ease;
 }
