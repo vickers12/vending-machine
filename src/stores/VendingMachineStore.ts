@@ -94,6 +94,21 @@ export class VendingMachineStore {
         };
     };
 
+    increaseCoinInventory = (coinKey: CoinEnum, amount: number = 1) => {
+        this.moneyInventory = {
+            ...this.moneyInventory,
+            [coinKey]: this.moneyInventory[coinKey] + amount
+        };
+    };
+
+    decreaseCoinInventory = (coinKey: CoinEnum, amount: number = 1) => {
+        const current = this.moneyInventory[coinKey];
+        this.moneyInventory = {
+            ...this.moneyInventory,
+            [coinKey]: Math.max(0, current - amount)
+        };
+    };
+
     cancel = () => {
         this.insertedAmount = 0;
         this.moneyInventory = updateMoneyInventory(
