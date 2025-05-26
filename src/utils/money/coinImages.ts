@@ -6,7 +6,7 @@ const imageMap = import.meta.glob("../../assets/*.png", {
     import: "default"
 }) as Record<string, string>;
 
-export function geCoinImage(coinKey: CoinEnum): string | undefined {
+export function getCoinImage(coinKey: CoinEnum): string | undefined {
     const key = `../../assets/${coinKey.toLowerCase()}.png`;
     return imageMap[key];
 }

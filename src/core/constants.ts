@@ -14,6 +14,12 @@ export const coinValues: Record<CoinEnum, number> = {
     [CoinEnum.QUARTER]: 25
 };
 
+export const coinLimits: Record<CoinEnum, number> = {
+    [CoinEnum.NICKEL]: 20,
+    [CoinEnum.DIME]: 20,
+    [CoinEnum.QUARTER]: 20
+};
+
 /* Products */
 export const productPrices: Record<ProductEnum, number> = {
     [ProductEnum.COLA]: 25,

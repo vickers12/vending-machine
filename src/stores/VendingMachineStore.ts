@@ -1,9 +1,16 @@
 import { makeAutoObservable } from "mobx";
 import { resetPaymentInventory, makeSinglePayment, updateMoneyInventory } from "@utils/money";
-import { type State, CoinEnum, ProductEnum } from "@core/types";
+import type { CoinEnum, ProductEnum } from "@core/types";
+import { type State } from "@core/types";
 import { EventEnum } from "@core/types";
 import { getChange } from "@utils/money";
-import { coinValues, productPrices, eventTimeoutDurations, productLimits } from "@core/constants";
+import {
+    coinValues,
+    productPrices,
+    eventTimeoutDurations,
+    productLimits,
+    coinLimits
+} from "@core/constants";
 
 export class VendingMachineStore {
     insertedAmount: State["insertedAmount"];
@@ -114,18 +121,9 @@ export class VendingMachineStore {
     };
 
     restockAll = () => {
-        this.productInventory = {
-            [ProductEnum.COLA]: 10,
-            [ProductEnum.DIETCOLA]: 10,
-            [ProductEnum.LIMESODA]: 10,
-            [ProductEnum.WATER]: 10
-        };
+        this.productInventory = productLimits;
 
-        this.moneyInventory = {
-            [CoinEnum.NICKEL]: 20,
-            [CoinEnum.DIME]: 20,
-            [CoinEnum.QUARTER]: 20
-        };
+        this.moneyInventory = coinLimits;
     };
 
     cancel = () => {

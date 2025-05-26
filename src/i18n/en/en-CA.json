@@ -21,7 +21,7 @@
         "dispensedWithChange": "Dispensed {{product}}. Returning {{value}} in change.",
         "dispensedWithoutChange": "Dispensed {{product}}. No change to return.",
         "unableToGiveChange": "Unable to give change. Please use exact amount or cancel.",
-        "insertPayment": "Please insert {{value}} to buy a {{product}}.",
+        "insertPayment": "Please insert {{value}} to buy {{product}}.",
         "outOfStock": "{{product}} is out of stock.",
         "cancelMsg": "Transaction canceled. Returning money."
     },

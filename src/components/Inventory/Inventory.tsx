@@ -14,10 +14,11 @@ import MinusIcon from "@assets/minus.svg?react";
 
 import styles from "./Inventory.module.css";
 import { Button } from "@components/Button";
-import { productLimits, productPrices } from "@core/constants";
+import { coinLimits, productLimits, productPrices } from "@core/constants";
 import { Overlay, useOverlayTrigger, usePopover } from "react-aria";
 import { useOverlayTriggerState } from "react-stately";
 import { Tooltip } from "@components/Tooltip";
+import { isInventoryStocked } from "@utils/inventory";
 
 export interface InventoryProps {}
 
@@ -62,6 +63,9 @@ export const Inventory: React.FC<InventoryProps> = observer(() => {
         triggerRef
     );
 
+    console.log("inventory: ", moneyInventory, productInventory);
+    console.log(coinLimits, productLimits);
+
     return (
         <Overlay>
             <div
@@ -82,7 +86,11 @@ export const Inventory: React.FC<InventoryProps> = observer(() => {
                         {t("inventory.tab")}
                     </ToggleButton>
                 </div>
-                <Dialog {...overlayProps} className={styles["inventory__content"]}>
+                <Dialog
+                    {...overlayProps}
+                    className={styles["inventory__content"]}
+                    aria-label={t("inventory.tab")}
+                >
                     <div className={styles["inventory__content-group"]}>
                         <h1 className={styles["inventory__header"]}>{t("inventory.coins")}</h1>
                         <div className={styles["inventory__data"]}>
@@ -295,6 +303,7 @@ export const Inventory: React.FC<InventoryProps> = observer(() => {
                             <Button
                                 className={styles["inventory__restock-btn"]}
                                 onPress={restockAll}
+                                isDisabled={isInventoryStocked(moneyInventory, productInventory)}
                             >
                                 {t("inventory.restockAll")}
                             </Button>

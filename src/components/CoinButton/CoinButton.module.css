@@ -6,11 +6,27 @@
     --box-shadow: var(--box-shadow-default);
     --size: 3.75rem;
     --transform: none;
-    --shadow-width: 64%;
+    --shadow-height-default: 0.625rem;
+    --shadow-height-nickel: 0.58rem;
+    --shadow-height-dime: 0.5rem;
+    --shadow-bottom-default: -0.4rem;
+    --shadow-bottom-nickel: -0.35rem;
+    --shadow-bottom-dime: -0.3rem;
+    --shadow-width-default: 64%;
+    --shadow-width-hovered: 60%;
+    --shadow-height: var(--shadow-height-default);
+    --shadow-width: var(--shadow-width-default);
+    --shadow-bottom: var(--shadow-bottom-default);
+    --image-height: 100%;
+    --image-width: 100%;
 
     cursor: pointer;
 
     position: relative;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
 
     width: var(--size);
     height: var(--size);
@@ -24,7 +40,7 @@
 
 .coin-button[data-hovered] {
     --transform: scale(1.06) translateY(-10%);
-    --shadow-width: 60%;
+    --shadow-width: var(--shadow-width-hovered);
 }
 
 .coin-button[data-pressed] {
@@ -34,19 +50,19 @@
 .coin-button[data-focus-visible] {
     --border: 2px solid #1f867c;
     --transform: scale(1.06) translateY(-10%);
-    --shadow-width: 60%;
+    --shadow-width: var(--shadow-width-hovered);
 }
 
 .coin-button::after {
     content: "";
 
     position: absolute;
-    bottom: -0.4rem;
+    bottom: var(--shadow-bottom);
     left: 50%;
     transform: translateX(-50%);
 
     width: var(--shadow-width);
-    height: 0.625rem;
+    height: var(--shadow-height);
     border-radius: 50%;
 
     background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.45), transparent 70%);
@@ -55,9 +71,33 @@
     transition: width 0.2s ease;
 }
 
+.coin-button--nickel {
+    --image-height: 90%;
+    --image-width: 90%;
+    --shadow-height: var(--shadow-height-nickel);
+    --shadow-width-default: 58%;
+    --shadow-width-hovered: 54%;
+    --shadow-bottom: var(--shadow-bottom-nickel);
+}
+
+.coin-button--dime {
+    --image-height: 80%;
+    --image-width: 80%;
+    --shadow-height: var(--shadow-height-dime);
+    --shadow-width-default: 54%;
+    --shadow-width-hovered: 50%;
+    --shadow-bottom: var(--shadow-bottom-dime);
+}
+
 .coin-button__image {
+    will-change: transform;
+
     transform: var(--transform);
-    width: 100%;
-    height: 100%;
+
+    flex: 0 0 auto;
+
+    width: var(--image-width);
+    height: var(--image-height);
+
     transition: transform 0.2s ease;
 }

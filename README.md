@@ -1,21 +1,21 @@
-# 🥤 Vending Machine Simulator
+# Vending Machine Simulator
 
-A fully interactive vending machine app built with React, TypeScript, MobX, and modern accessibility practices using React Aria.
-
----
-
-## 🚀 Features
-
-- 💸 Insert Canadian coins (5¢, 10¢, 25¢)
-- 🧃 Purchase products like Cola, Water, and Lime Soda
-- 🧠 Intelligent change calculation
-- 🧮 Admin inventory panel with quantity adjustment and restock button
-- ♿ Accessible UI using `react-aria`
-- 📱 Responsive layout with mobile-friendly overlays
+A fully interactive vending machine app built with React, TypeScript, MobX and modern accessibility practices using React Aria.
 
 ---
 
-## 🛠️ Tech Stack
+## Features
+
+- Insert Canadian coins (5¢, 10¢, 25¢)
+- Purchase products like Cola, Water, and Lime Soda
+- Intelligent change calculation
+- Admin inventory panel with quantity adjustment and restock button
+- Accessible UI using `react-aria`
+- Responsive layout with mobile-friendly overlays
+
+---
+
+## Tech Stack
 
 - **React** (with functional components and hooks)
 - **TypeScript**
@@ -27,7 +27,7 @@ A fully interactive vending machine app built with React, TypeScript, MobX, and 
 
 ---
 
-## 📦 Installation
+## Installation
 
 ```bash
 pnpm install

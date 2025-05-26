@@ -3,7 +3,8 @@ import type { CoinEnum } from "@core/types";
 import { useTranslation } from "react-i18next";
 import { coinLabelKeys } from "@i18n/labelKeys";
 import styles from "./CoinButton.module.css";
-import { geCoinImage } from "@utils/money";
+import { getCoinImage } from "@utils/money";
+import classNames from "classnames";
 
 interface CoinButtonProps {
     coinKey: CoinEnum;
@@ -13,11 +14,14 @@ interface CoinButtonProps {
 export const CoinButton: React.FC<CoinButtonProps> = ({ coinKey, onInsert }) => {
     const { t } = useTranslation();
     const label = t(coinLabelKeys[coinKey]);
-    const coinImg = geCoinImage(coinKey);
+    const coinImg = getCoinImage(coinKey);
 
     return (
         <Button
-            className={styles["coin-button"]}
+            className={classNames(
+                styles["coin-button"],
+                styles[`coin-button--${coinKey.toLowerCase()}`]
+            )}
             onPress={() => onInsert(coinKey)}
             aria-label={t("coinButton.ariaLabel", { label: label })}
         >
