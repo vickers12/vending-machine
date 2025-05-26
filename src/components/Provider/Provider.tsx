@@ -1,6 +1,6 @@
 import i18n from "@i18n";
 import { VendingMachineContext } from "@stores/VendingMachineContext";
-import { vendingMachineStoreInstance } from "@stores/VendingMachineStoreInstance";
+import { vendingMachineStoreInstance } from "@stores/vendingMachineStoreInstance";
 import type { ReactNode } from "react";
 import { I18nProvider } from "react-aria-components";
 
