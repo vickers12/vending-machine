@@ -5,11 +5,11 @@
     z-index: 999;
     top: 5svh;
     left: 0;
-    transform: translateX(calc(-100% + var(--tab-width)));
+    transform: translateX(-100%);
 
     display: flex;
 
-    max-width: 90%;
+    max-width: calc(92% - var(--tab-width));
     max-height: 90svh !important;
 
     font-size: 1rem;
@@ -28,6 +28,10 @@
 
 .inventory__tab {
     cursor: pointer;
+
+    position: absolute;
+    top: 0;
+    left: 100%;
 
     width: var(--tab-width);
     padding: 1rem 0;
@@ -96,7 +100,7 @@
 
 .inventory__summary {
     display: flex;
-    gap: 0.25rem;
+    gap: 0.5rem;
     align-items: center;
     justify-self: end;
 

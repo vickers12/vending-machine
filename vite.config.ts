@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { resolve } from "path";
@@ -23,8 +24,15 @@ export default defineConfig({
             "@hooks": resolve(__dirname, "./src/hooks"),
             "@utils": resolve(__dirname, "./src/utils"),
             "@i18n": resolve(__dirname, "./src/i18n"),
-            "@stores": resolve(__dirname, "./src/stores")
+            "@stores": resolve(__dirname, "./src/stores"),
+            "^.+\\.module\\.css$": "/test/__mocks__/styleMock.ts"
         }
+    },
+    test: {
+        globals: true,
+        environment: "jsdom",
+        setupFiles: "./src/test/setup-tests.ts",
+        css: true
     },
     server: {
         host: true
