@@ -46,8 +46,6 @@ pnpm test
 pnpm lint
 ```
 
-### CSS Linting
-
 ```bash
 pnpm lint:css
 ```
