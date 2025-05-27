@@ -33,3 +33,21 @@ A fully interactive vending machine app built with React, TypeScript, MobX and m
 pnpm install
 pnpm dev
 ```
+
+## Testing
+
+```bash
+pnpm test
+```
+
+## Linting
+
+```bash
+pnpm lint
+```
+
+### CSS Linting
+
+```bash
+pnpm lint:css
+```

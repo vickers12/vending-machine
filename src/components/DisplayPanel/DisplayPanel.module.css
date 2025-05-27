@@ -1,8 +1,6 @@
 /* styles.css or DisplayPanel.module.css */
 
 .display-panel {
-    /* Static variables */
-
     /* Updatable Variables */
     --background-color: #fff;
     --color: #17655e;

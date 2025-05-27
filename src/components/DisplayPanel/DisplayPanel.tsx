@@ -12,7 +12,7 @@ export const DisplayPanel: React.FC<DisplayPanelProps> = observer(() => {
     const message = useObservedDisplayMessage();
     const defaultEvent = event === null;
     const noAnimation = defaultEvent;
-    const animatedMessage = useTypingEffect(message, 25, noAnimation);
+    const animatedMessage = useTypingEffect(message, 15, noAnimation);
 
     return (
         <div

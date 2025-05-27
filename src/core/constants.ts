@@ -37,9 +37,9 @@ export const productLimits: Record<ProductEnum, number> = {
 
 /* Events */
 export const eventTimeoutDurations: Partial<Record<EventEnum, number>> = {
-    [EventEnum.INSERT_PAYMENT]: 2500,
-    [EventEnum.OUT_OF_STOCK]: 2500,
-    [EventEnum.UNABLE_TO_GIVE_CHANGE]: 3000,
-    [EventEnum.CANCELLED]: 2500,
-    [EventEnum.PRODUCT_DISPENSED]: 3000
+    [EventEnum.INSERT_PAYMENT]: 3000,
+    [EventEnum.OUT_OF_STOCK]: 2600,
+    [EventEnum.UNABLE_TO_GIVE_CHANGE]: 3200,
+    [EventEnum.CANCELLED]: 3000,
+    [EventEnum.PRODUCT_DISPENSED]: 3500
 };
