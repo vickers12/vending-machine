@@ -4,7 +4,7 @@
     /* Updatable Variables */
     --border: 2px solid transparent;
     --box-shadow: var(--box-shadow-default);
-    --size: 3.75rem;
+    --size: 3rem;
     --transform: none;
     --shadow-height-default: 0.625rem;
     --shadow-height-nickel: 0.58rem;
@@ -100,4 +100,10 @@
     height: var(--image-height);
 
     transition: transform 0.2s ease;
+}
+
+@media (min-height: 768px) {
+    .coin-button {
+        --size: 3.75rem;
+    }
 }

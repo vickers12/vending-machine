@@ -101,8 +101,9 @@
 
     align-self: flex-end;
 
+    font-family: var(--font-family-primary);
     font-size: 1rem; /* Fallback */
-    font-size: 10cqw;
+    font-size: clamp(1rem, 10cqmin, 1.5rem);
     font-weight: 700;
     color: var(--price-color);
 }
@@ -114,8 +115,8 @@
 
     margin-top: auto;
 
-    font-size: 2.5rem; /* Fallback */
-    font-size: 18cqw;
+    font-size: 2.25rem; /* Fallback */
+    font-size: clamp(2rem, 18cqmin, 2.75rem);
     font-weight: 500;
 }
 

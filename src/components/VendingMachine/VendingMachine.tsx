@@ -8,7 +8,7 @@ import { breakpoints } from "@core/constants";
 import { Dispenser } from "@components/Dispenser";
 
 export const VendingMachine: React.FC = () => {
-    const isMobile = !useMediaQuery(breakpoints.sm);
+    const isMobile = !useMediaQuery(breakpoints.md);
 
     return (
         <section className={styles["vending-machine"]}>

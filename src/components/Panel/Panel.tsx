@@ -19,7 +19,7 @@ export interface PanelProps {}
 export const Panel: React.FC<PanelProps> = observer(() => {
     const { t } = useTranslation();
     const store = useVendingMachineStore();
-    const isDesktop = useMediaQuery(breakpoints.sm);
+    const isDesktop = useMediaQuery(breakpoints.md);
 
     const handleDeposit = (payment: CoinEnum) => {
         store.deposit(payment);

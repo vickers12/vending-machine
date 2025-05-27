@@ -1,6 +1,6 @@
 # Vending Machine Simulator
 
-A fully interactive vending machine app built with React, TypeScript, MobX and modern accessibility practices using React Aria.
+A fully interactive and responsive vending machine app built with React, TypeScript, MobX and modern accessibility practices using React Aria.
 
 ---
 
