@@ -45,9 +45,6 @@ export const Inventory: React.FC<InventoryProps> = observer(() => {
         triggerRef
     );
 
-    console.log("inventory: ", moneyInventory, productInventory);
-    console.log(coinLimits, productLimits);
-
     return (
         <Overlay>
             <div

@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 
 import { useTranslation } from "react-i18next";
 import { TooltipTrigger } from "react-aria-components";
-import { Fragment } from "react";
+import { Fragment, useMemo } from "react";
 import classNames from "classnames";
 import { productLabelKeys } from "@i18n/labelKeys";
 import type { ProductEnum } from "@core/types";
@@ -13,30 +13,34 @@ import MinusIcon from "@assets/minus.svg?react";
 
 import styles from "./Inventory.module.css";
 import { Button } from "@components/Button";
-import { coinLimits, productLimits, productPrices } from "@core/constants";
+import { productLimits, productPrices } from "@core/constants";
 import { Tooltip } from "@components/Tooltip";
 
 export interface ProductInventoryProps {}
 
 export const ProductInventory: React.FC<ProductInventoryProps> = observer(() => {
     const { t } = useTranslation();
-    const { moneyInventory, productInventory, decreaseProductInventory, increaseProductInventory } =
+    const { productInventory, decreaseProductInventory, increaseProductInventory } =
         useVendingMachineStore();
     const { format } = useMoneyFormat();
 
-    let totalNumberOfProducts = 0;
-    let totalProductAmount = 0;
+    const [totalNumberOfProducts, totalProductAmount] = useMemo(() => {
+        let totalCount = 0;
+        let totalPrice = 0;
 
-    console.log("inventory: ", moneyInventory, productInventory);
-    console.log(coinLimits, productLimits);
+        for (const [key, count] of Object.entries(productInventory)) {
+            totalCount += count;
+            totalPrice += productPrices[key as ProductEnum] * count;
+        }
+
+        return [totalCount, totalPrice];
+    }, [productInventory]);
 
     return (
         <div className={styles["inventory__content-group"]}>
             <h1 className={styles["inventory__header"]}>{t("inventory.products")}</h1>
             <div className={styles["inventory__data"]}>
                 {Object.entries(productInventory).map(([productKey, count]) => {
-                    totalNumberOfProducts += count;
-                    totalProductAmount += productPrices[productKey as ProductEnum] * count;
                     const max = productLimits[productKey as ProductEnum];
 
                     return (
