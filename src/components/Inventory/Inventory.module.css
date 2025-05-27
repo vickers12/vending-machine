@@ -110,8 +110,10 @@
 }
 
 .inventory__count {
+    min-width: 1.3rem;
     font-weight: 400;
     color: #767676;
+    text-align: center;
 }
 
 .inventory__total {

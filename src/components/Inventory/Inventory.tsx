@@ -8,7 +8,6 @@ import classNames from "classnames";
 
 import styles from "./Inventory.module.css";
 import { Button } from "@components/Button";
-import { coinLimits, productLimits } from "@core/constants";
 import { Overlay, useOverlayTrigger, usePopover } from "react-aria";
 import { useOverlayTriggerState } from "react-stately";
 import { Tooltip } from "@components/Tooltip";
